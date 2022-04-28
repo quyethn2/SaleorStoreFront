@@ -13,8 +13,12 @@ import {
   CollectionBySlugQuery,
   CollectionBySlugQueryVariables,
 } from "@/saleor/api";
+import { useIntl } from "react-intl";
+import messages from "@/components/translations";
 
 export const getStaticProps = async (context: GetStaticPropsContext) => {
+  console.log("CollectionPage context:", JSON.stringify(context));
+
   const collectionSlug = context.params?.slug?.toString()!;
   const response: ApolloQueryResult<CollectionBySlugQuery> = await apolloClient.query<
     CollectionBySlugQuery,
@@ -26,13 +30,16 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
       ...contextToRegionQuery(context),
     },
   });
+
   return {
     props: {
       collection: response.data.collection,
     },
   };
 };
+
 function CollectionPage({ collection }: InferGetStaticPropsType<typeof getStaticProps>) {
+  const t = useIntl();
   if (!collection) {
     return <Custom404 />;
   }
@@ -46,6 +53,9 @@ function CollectionPage({ collection }: InferGetStaticPropsType<typeof getStatic
       </header>
       <main>
         <div className="max-w-7xl mx-auto px-8">
+          <h1 className="text-3xl font-extrabold tracking-tight text-gray-900 pb-4">
+            {t.formatMessage(messages.titleCollection)}
+          </h1>
           <ProductCollection filter={{ collections: [collection?.id] }} />
         </div>
       </main>

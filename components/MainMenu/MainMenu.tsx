@@ -38,6 +38,65 @@ export function MainMenu() {
     return null;
   }
   const menu = data?.menu?.items || [];
+
+  // fake data menu
+  const menuCollection: any = [{
+    __typename: "MenuItem",
+    children: [
+      {
+        __typename: "MenuItem",
+        id: "TWVudUl0ZW06MTU=",
+        name: "Featured Products",
+        translation: null,
+        collection: {
+          __typename: "Collection",
+          id: "Q29sbGVjdGlvbjoxMQ==",
+          slug: "featured-products",
+        },
+        category: null,
+        page: null,
+      },
+      {
+        __typename: "MenuItem",
+        id: "TWVudUl0ZW06MTY=",
+        name: "Summer collection",
+        translation: null,
+        collection: {
+          __typename: "Collection",
+          id: "Q2F0ZWdvcnk6MTI=",
+          slug: "summer-collection",
+        },
+        category: null,
+        page: null,
+      },
+      {
+        __typename: "MenuItem",
+        id: "TWVudUl0ZW06MTc=",
+        name: "Winter sale",
+        translation: null,
+        collection: {
+          __typename: "Collection",
+          id: "Q2F0ZWdvcnk6MTM=",
+          slug: "winter-sale",
+        },
+        category: null,
+        page: null,
+      },
+    ],
+    id: "TWVudUl0ZW06MTQ=",
+    name: "Collection",
+    translation: null,
+    collection: {
+      __typename: "Category",
+      id: "Q2F0ZWdvcnk6MTA=",
+      slug: "collection",
+    },
+    category: null,
+    page: null,
+  }];
+
+  const newMenu = [menu[0], menu[1], ...menuCollection];
+
   const menuLink = (item: MenuItemFragment) => {
     if (item.category) {
       return paths.category._slug(item.category?.slug).$url();
@@ -63,7 +122,7 @@ export function MainMenu() {
       >
         <div className="mt-5 mr-2 -ml-2 md:mx-3 z-40 absolute h-screen w-screen lg:max-w-7xl md:h-56 bg-white border border-gray-200 rounded-md shadow-lg outline-none">
           <div className="flex flex-col md:flex-row cursor-default md:divide-x md:divide-gray-200">
-            {menu?.map((item) => {
+            {newMenu?.map((item) => {
               if (!item) {
                 return null;
               }
@@ -71,7 +130,7 @@ export function MainMenu() {
                 <div key={item?.id} className="h-32 md:pl-10 ml-5 md:ml-16 mt-10">
                   <h2 className="font-semibold text-md">{translate(item, "name")}</h2>
                   <ul className="mt-3 absolute">
-                    {item?.children?.map((child) => {
+                    {item?.children?.map((child: any) => {
                       if (!notNullable(child)) {
                         return null;
                       }
