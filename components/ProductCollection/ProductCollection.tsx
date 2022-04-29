@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useIntl } from "react-intl";
 
-import { ProductFilterInput, useProductCollectionQuery } from "@/saleor/api";
+import { ProductFilterInput, ProductOrder, useProductCollectionQuery } from "@/saleor/api";
 
 import { Pagination } from "../Pagination";
 import { ProductCard } from "../ProductCard";
@@ -12,17 +12,21 @@ import { messages } from "../translations";
 export interface ProductCollectionProps {
   filter?: ProductFilterInput;
   allowMore?: boolean;
+  sortBy?: ProductOrder;
 }
 
-export function ProductCollection({ filter, allowMore = true }: ProductCollectionProps) {
+export function ProductCollection({ filter, allowMore = true, sortBy }: ProductCollectionProps) {
   const t = useIntl();
   const { query } = useRegions();
 
-  const { loading, error, data, fetchMore } = useProductCollectionQuery({
-    variables: {
-      filter,
-      ...query,
-    },
+  const variables = {
+    filter,
+    ...query,
+    sortBy,
+  };
+
+  const { loading, error, data, fetchMore, refetch } = useProductCollectionQuery({
+    variables,
   });
 
   const onLoadMore = () => {
@@ -33,6 +37,15 @@ export function ProductCollection({ filter, allowMore = true }: ProductCollectio
     });
   };
 
+  const onReloadData = () => {
+    refetch(variables as any);
+  };
+
+  useEffect(() => {
+    variables.sortBy = sortBy;
+    onReloadData();
+  }, [sortBy]);
+
   if (loading) return <Spinner />;
   if (error) return <p>Error</p>;
 
@@ -40,9 +53,10 @@ export function ProductCollection({ filter, allowMore = true }: ProductCollectio
   if (products.length === 0) {
     return <p>{t.formatMessage(messages.noProducts)}</p>;
   }
+
   return (
     <div>
-      <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-2">
         {products.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}

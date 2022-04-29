@@ -368,6 +368,11 @@ export const messages = defineMessages({
     description: "Set billing default button label",
     defaultMessage: "Set as billing default",
   },
+  titleCollection: {
+    id: "app.title.collection",
+    description: "Collection",
+    defaultMessage: "Collection",
+  },
 });
 
 export default messages;
