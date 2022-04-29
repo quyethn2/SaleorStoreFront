@@ -38,4 +38,5 @@ fragment ProductDetailsFragment on Product {
   category {
     name
   }
+  rating
 }

@@ -8743,7 +8743,7 @@ export type PageTranslatableContent = Node & {
   contentJson?: Maybe<Scalars['JSONString']>;
   id: Scalars['ID'];
   /**
-   * A static page that can be manually added by a shop operator through the dashboard.
+   * ('A static page that can be manually added by a shop operator ', 'through the dashboard.')
    * @deprecated This field will be removed in Saleor 4.0. Get model fields from the root level queries.
    */
   page?: Maybe<Page>;
@@ -9426,7 +9426,7 @@ export type Product = Node & ObjectWithMetadata & {
   __typename?: 'Product';
   /** List of attributes assigned to this product. */
   attributes: Array<SelectedAttribute>;
-  /** Date when product is available for purchase. */
+  /** Date when product is available for purchase.  */
   availableForPurchase?: Maybe<Scalars['Date']>;
   category?: Maybe<Category>;
   /** Channel given to retrieve this product. Also used by federation gateway to resolve this object in a federated query. */
@@ -13900,7 +13900,7 @@ export type PriceFragment = { __typename?: 'Money', currency: string, amount: nu
 
 export type ProductCardFragment = { __typename?: 'Product', id: string, slug: string, name: string, translation?: { __typename?: 'ProductTranslation', id: string, name?: string | null } | null, thumbnail?: { __typename?: 'Image', url: string, alt?: string | null } | null, category?: { __typename?: 'Category', id: string, name: string, translation?: { __typename?: 'CategoryTranslation', id: string, name?: string | null } | null } | null, pricing?: { __typename?: 'ProductPricingInfo', onSale?: boolean | null, priceRange?: { __typename?: 'TaxedMoneyRange', start?: { __typename?: 'TaxedMoney', gross: { __typename?: 'Money', currency: string, amount: number } } | null, stop?: { __typename?: 'TaxedMoney', gross: { __typename?: 'Money', currency: string, amount: number } } | null } | null } | null };
 
-export type ProductDetailsFragment = { __typename?: 'Product', id: string, name: string, slug: string, description?: string | null, seoDescription?: string | null, seoTitle?: string | null, isAvailableForPurchase?: boolean | null, translation?: { __typename?: 'ProductTranslation', id: string, description?: string | null, name?: string | null } | null, attributes: Array<{ __typename?: 'SelectedAttribute', attribute: { __typename?: 'Attribute', id: string, name?: string | null, type?: AttributeTypeEnum | null, unit?: MeasurementUnitsEnum | null, translation?: { __typename?: 'AttributeTranslation', id: string, name: string } | null }, values: Array<{ __typename?: 'AttributeValue', id: string, name?: string | null, value?: string | null, translation?: { __typename?: 'AttributeValueTranslation', id: string, name: string, richText?: string | null } | null } | null> }>, category?: { __typename?: 'Category', name: string, id: string, slug: string, translation?: { __typename?: 'CategoryTranslation', id: string, name?: string | null } | null } | null, variants?: Array<{ __typename?: 'ProductVariant', id: string, name: string, quantityAvailable?: number | null, translation?: { __typename?: 'ProductVariantTranslation', id: string, name: string } | null, attributes: Array<{ __typename?: 'SelectedAttribute', attribute: { __typename?: 'Attribute', id: string, name?: string | null, type?: AttributeTypeEnum | null, unit?: MeasurementUnitsEnum | null, translation?: { __typename?: 'AttributeTranslation', id: string, name: string } | null }, values: Array<{ __typename?: 'AttributeValue', id: string, name?: string | null, value?: string | null, translation?: { __typename?: 'AttributeValueTranslation', id: string, name: string, richText?: string | null } | null } | null> }>, media?: Array<{ __typename?: 'ProductMedia', url: string, alt: string, type: ProductMediaType }> | null, pricing?: { __typename?: 'VariantPricingInfo', price?: { __typename?: 'TaxedMoney', gross: { __typename?: 'Money', currency: string, amount: number } } | null } | null } | null> | null, pricing?: { __typename?: 'ProductPricingInfo', priceRange?: { __typename?: 'TaxedMoneyRange', start?: { __typename?: 'TaxedMoney', gross: { __typename?: 'Money', currency: string, amount: number } } | null } | null } | null, media?: Array<{ __typename?: 'ProductMedia', url: string, alt: string, type: ProductMediaType }> | null, thumbnail?: { __typename?: 'Image', url: string, alt?: string | null } | null };
+export type ProductDetailsFragment = { __typename?: 'Product', id: string, name: string, slug: string, description?: string | null, seoDescription?: string | null, seoTitle?: string | null, isAvailableForPurchase?: boolean | null, rating?: number | null, translation?: { __typename?: 'ProductTranslation', id: string, description?: string | null, name?: string | null } | null, attributes: Array<{ __typename?: 'SelectedAttribute', attribute: { __typename?: 'Attribute', id: string, name?: string | null, type?: AttributeTypeEnum | null, unit?: MeasurementUnitsEnum | null, translation?: { __typename?: 'AttributeTranslation', id: string, name: string } | null }, values: Array<{ __typename?: 'AttributeValue', id: string, name?: string | null, value?: string | null, translation?: { __typename?: 'AttributeValueTranslation', id: string, name: string, richText?: string | null } | null } | null> }>, category?: { __typename?: 'Category', name: string, id: string, slug: string, translation?: { __typename?: 'CategoryTranslation', id: string, name?: string | null } | null } | null, variants?: Array<{ __typename?: 'ProductVariant', id: string, name: string, quantityAvailable?: number | null, translation?: { __typename?: 'ProductVariantTranslation', id: string, name: string } | null, attributes: Array<{ __typename?: 'SelectedAttribute', attribute: { __typename?: 'Attribute', id: string, name?: string | null, type?: AttributeTypeEnum | null, unit?: MeasurementUnitsEnum | null, translation?: { __typename?: 'AttributeTranslation', id: string, name: string } | null }, values: Array<{ __typename?: 'AttributeValue', id: string, name?: string | null, value?: string | null, translation?: { __typename?: 'AttributeValueTranslation', id: string, name: string, richText?: string | null } | null } | null> }>, media?: Array<{ __typename?: 'ProductMedia', url: string, alt: string, type: ProductMediaType }> | null, pricing?: { __typename?: 'VariantPricingInfo', price?: { __typename?: 'TaxedMoney', gross: { __typename?: 'Money', currency: string, amount: number } } | null } | null } | null> | null, pricing?: { __typename?: 'ProductPricingInfo', priceRange?: { __typename?: 'TaxedMoneyRange', start?: { __typename?: 'TaxedMoney', gross: { __typename?: 'Money', currency: string, amount: number } } | null } | null } | null, media?: Array<{ __typename?: 'ProductMedia', url: string, alt: string, type: ProductMediaType }> | null, thumbnail?: { __typename?: 'Image', url: string, alt?: string | null } | null };
 
 export type ProductMediaFragment = { __typename?: 'ProductMedia', url: string, alt: string, type: ProductMediaType };
 
@@ -13928,6 +13928,7 @@ export type CheckoutAddProductLineMutationVariables = Exact<{
   checkoutToken: Scalars['UUID'];
   variantId: Scalars['ID'];
   locale: LanguageCodeEnum;
+  quantity: Scalars['Int'];
 }>;
 
 
@@ -14160,7 +14161,7 @@ export type ProductBySlugQueryVariables = Exact<{
 }>;
 
 
-export type ProductBySlugQuery = { __typename?: 'Query', product?: { __typename?: 'Product', id: string, name: string, slug: string, description?: string | null, seoDescription?: string | null, seoTitle?: string | null, isAvailableForPurchase?: boolean | null, translation?: { __typename?: 'ProductTranslation', id: string, description?: string | null, name?: string | null } | null, attributes: Array<{ __typename?: 'SelectedAttribute', attribute: { __typename?: 'Attribute', id: string, name?: string | null, type?: AttributeTypeEnum | null, unit?: MeasurementUnitsEnum | null, translation?: { __typename?: 'AttributeTranslation', id: string, name: string } | null }, values: Array<{ __typename?: 'AttributeValue', id: string, name?: string | null, value?: string | null, translation?: { __typename?: 'AttributeValueTranslation', id: string, name: string, richText?: string | null } | null } | null> }>, category?: { __typename?: 'Category', name: string, id: string, slug: string, translation?: { __typename?: 'CategoryTranslation', id: string, name?: string | null } | null } | null, variants?: Array<{ __typename?: 'ProductVariant', id: string, name: string, quantityAvailable?: number | null, translation?: { __typename?: 'ProductVariantTranslation', id: string, name: string } | null, attributes: Array<{ __typename?: 'SelectedAttribute', attribute: { __typename?: 'Attribute', id: string, name?: string | null, type?: AttributeTypeEnum | null, unit?: MeasurementUnitsEnum | null, translation?: { __typename?: 'AttributeTranslation', id: string, name: string } | null }, values: Array<{ __typename?: 'AttributeValue', id: string, name?: string | null, value?: string | null, translation?: { __typename?: 'AttributeValueTranslation', id: string, name: string, richText?: string | null } | null } | null> }>, media?: Array<{ __typename?: 'ProductMedia', url: string, alt: string, type: ProductMediaType }> | null, pricing?: { __typename?: 'VariantPricingInfo', price?: { __typename?: 'TaxedMoney', gross: { __typename?: 'Money', currency: string, amount: number } } | null } | null } | null> | null, pricing?: { __typename?: 'ProductPricingInfo', priceRange?: { __typename?: 'TaxedMoneyRange', start?: { __typename?: 'TaxedMoney', gross: { __typename?: 'Money', currency: string, amount: number } } | null } | null } | null, media?: Array<{ __typename?: 'ProductMedia', url: string, alt: string, type: ProductMediaType }> | null, thumbnail?: { __typename?: 'Image', url: string, alt?: string | null } | null } | null };
+export type ProductBySlugQuery = { __typename?: 'Query', product?: { __typename?: 'Product', id: string, name: string, slug: string, description?: string | null, seoDescription?: string | null, seoTitle?: string | null, isAvailableForPurchase?: boolean | null, rating?: number | null, translation?: { __typename?: 'ProductTranslation', id: string, description?: string | null, name?: string | null } | null, attributes: Array<{ __typename?: 'SelectedAttribute', attribute: { __typename?: 'Attribute', id: string, name?: string | null, type?: AttributeTypeEnum | null, unit?: MeasurementUnitsEnum | null, translation?: { __typename?: 'AttributeTranslation', id: string, name: string } | null }, values: Array<{ __typename?: 'AttributeValue', id: string, name?: string | null, value?: string | null, translation?: { __typename?: 'AttributeValueTranslation', id: string, name: string, richText?: string | null } | null } | null> }>, category?: { __typename?: 'Category', name: string, id: string, slug: string, translation?: { __typename?: 'CategoryTranslation', id: string, name?: string | null } | null } | null, variants?: Array<{ __typename?: 'ProductVariant', id: string, name: string, quantityAvailable?: number | null, translation?: { __typename?: 'ProductVariantTranslation', id: string, name: string } | null, attributes: Array<{ __typename?: 'SelectedAttribute', attribute: { __typename?: 'Attribute', id: string, name?: string | null, type?: AttributeTypeEnum | null, unit?: MeasurementUnitsEnum | null, translation?: { __typename?: 'AttributeTranslation', id: string, name: string } | null }, values: Array<{ __typename?: 'AttributeValue', id: string, name?: string | null, value?: string | null, translation?: { __typename?: 'AttributeValueTranslation', id: string, name: string, richText?: string | null } | null } | null> }>, media?: Array<{ __typename?: 'ProductMedia', url: string, alt: string, type: ProductMediaType }> | null, pricing?: { __typename?: 'VariantPricingInfo', price?: { __typename?: 'TaxedMoney', gross: { __typename?: 'Money', currency: string, amount: number } } | null } | null } | null> | null, pricing?: { __typename?: 'ProductPricingInfo', priceRange?: { __typename?: 'TaxedMoneyRange', start?: { __typename?: 'TaxedMoney', gross: { __typename?: 'Money', currency: string, amount: number } } | null } | null } | null, media?: Array<{ __typename?: 'ProductMedia', url: string, alt: string, type: ProductMediaType }> | null, thumbnail?: { __typename?: 'Image', url: string, alt?: string | null } | null } | null };
 
 export type ProductCollectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']>;
@@ -14609,6 +14610,7 @@ export const ProductDetailsFragmentDoc = gql`
   category {
     name
   }
+  rating
 }
     ${SelectedAttributeDetailsFragmentDoc}
 ${CategoryBasicFragmentDoc}
@@ -14693,10 +14695,10 @@ export type AddressSetDefaultMutationHookResult = ReturnType<typeof useAddressSe
 export type AddressSetDefaultMutationResult = Apollo.MutationResult<AddressSetDefaultMutation>;
 export type AddressSetDefaultMutationOptions = Apollo.BaseMutationOptions<AddressSetDefaultMutation, AddressSetDefaultMutationVariables>;
 export const CheckoutAddProductLineDocument = gql`
-    mutation CheckoutAddProductLine($checkoutToken: UUID!, $variantId: ID!, $locale: LanguageCodeEnum!) {
+    mutation CheckoutAddProductLine($checkoutToken: UUID!, $variantId: ID!, $locale: LanguageCodeEnum!, $quantity: Int!) {
   checkoutLinesAdd(
     token: $checkoutToken
-    lines: [{quantity: 1, variantId: $variantId}]
+    lines: [{quantity: $quantity, variantId: $variantId}]
   ) {
     checkout {
       ...CheckoutDetailsFragment
@@ -14726,6 +14728,7 @@ export type CheckoutAddProductLineMutationFn = Apollo.MutationFunction<CheckoutA
  *      checkoutToken: // value for 'checkoutToken'
  *      variantId: // value for 'variantId'
  *      locale: // value for 'locale'
+ *      quantity: // value for 'quantity'
  *   },
  * });
  */

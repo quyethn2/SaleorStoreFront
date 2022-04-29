@@ -32,7 +32,6 @@ export function CheckoutLineItem({ line }: CheckoutLineItemProps) {
 
   const [quantity, setQuantity] = React.useState<number>();
   const [errors, setErrors] = React.useState<ErrorDetailsFragment[] | null>(null);
-
   React.useEffect(() => {
     if (!line) return;
     setQuantity(line.quantity);
