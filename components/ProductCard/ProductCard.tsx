@@ -6,6 +6,7 @@ import { translate } from "@/lib/translations";
 import { ProductCardFragment } from "@/saleor/api";
 
 import { useRegions } from "../RegionsProvider";
+import { Rating } from "../Rating";
 
 const styles = {
   grid: "grid grid-cols-4 gap-4",
@@ -54,11 +55,14 @@ export function ProductCard({ product }: ProductCardProps) {
             )}
           </div>
           <div className={styles.product.details}>
-            <p className={styles.product.name}>{translate(product, "name")}</p>
+            <p className={styles.product.name}>{translate(product, "name")} tesst</p>
             {!!product.category && (
               <p className={styles.product.category}>{translate(product.category, "name")}</p>
             )}
             <p className={styles.product.price}>{priceDisplay}</p>
+            <p>
+              <Rating ratings={product.rating!} />
+            </p>
           </div>
         </a>
       </Link>

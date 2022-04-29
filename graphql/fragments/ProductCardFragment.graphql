@@ -32,4 +32,5 @@ fragment ProductCardFragment on Product {
       }
     }
   }
+  rating
 }

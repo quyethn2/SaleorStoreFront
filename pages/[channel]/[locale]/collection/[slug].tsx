@@ -15,9 +15,9 @@ import {
   CollectionBySlugDocument,
   CollectionBySlugQuery,
   CollectionBySlugQueryVariables,
-  OrderDirection,
-  ProductOrder
+  ProductOrder,
 } from "@/saleor/api";
+import { ListOptionOrder } from "@/components/SortTable/SortTable";
 
 export const getStaticProps = async (context: GetStaticPropsContext) => {
   console.log("CollectionPage context:", JSON.stringify(context));
@@ -47,13 +47,37 @@ function CollectionPage({ collection }: InferGetStaticPropsType<typeof getStatic
     field: ProductOrderFieldEnum.NAME,
   });
 
-  const onSort = (sortBy: OrderDirection) => {
+  const onSort = (sortBy: ListOptionOrder): void => {
     const newProductOrder = { ...productOrder };
-    newProductOrder.direction = sortBy;
+
+    switch (sortBy) {
+      case ListOptionOrder.NAME_ASC:
+        newProductOrder.direction = OrderDirectionEnum.ASC;
+        newProductOrder.field = ProductOrderFieldEnum.NAME;
+        break;
+
+      case ListOptionOrder.NAME_DESC:
+        newProductOrder.direction = OrderDirectionEnum.DESC;
+        newProductOrder.field = ProductOrderFieldEnum.NAME;
+        break;
+
+      case ListOptionOrder.PRICE_ASC:
+        newProductOrder.direction = OrderDirectionEnum.ASC;
+        newProductOrder.field = ProductOrderFieldEnum.PRICE;
+        break;
+
+      case ListOptionOrder.PRICE_DESC:
+        newProductOrder.direction = OrderDirectionEnum.DESC;
+        newProductOrder.field = ProductOrderFieldEnum.PRICE;
+        break;
+
+      default:
+        break;
+    }
+
     setProductOrder(newProductOrder);
   };
 
-  const t = useIntl();
   if (!collection) {
     return <Custom404 />;
   }
@@ -69,7 +93,6 @@ function CollectionPage({ collection }: InferGetStaticPropsType<typeof getStatic
         <div className="max-w-7xl mx-auto px-8 mb-4">
           <div className="flex justify-between mb-2">
             <h1 className="text-3xl font-extrabold tracking-tight text-gray-900 pb-4">
-              {/* {t.formatMessage(messages.titleCollection)} */}
               {collection.name}
             </h1>
             <SortTable onSort={onSort} />

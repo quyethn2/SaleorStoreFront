@@ -1,14 +1,25 @@
 import { OrderDirectionEnum } from "graphql/types.generated";
 import { useState } from "react";
 
-import { OrderDirection } from "@/saleor/api";
+import { OrderDirection, ProductOrder, ProductOrderField } from "@/saleor/api";
 
+export interface OptionOrder{
+  name: ProductOrder
+  price: ProductOrder
+}
+
+export enum ListOptionOrder {
+  NAME_ASC = 'NAME_ASC',
+  NAME_DESC = 'NAME_DESC',
+  PRICE_ASC = 'PRICE_ASC',
+  PRICE_DESC = 'PRICE_DESC'
+}
 export interface SortTableProps {
-  onSort: (sortBy: OrderDirection) => void;
+  onSort: (sortBy: ListOptionOrder) => void;
 }
 
 export function SortTable({ onSort }: SortTableProps) {
-  const [selectSortValue, setSelectSortValue] = useState(OrderDirectionEnum.ASC);
+  const [selectSortValue, setSelectSortValue] = useState(ListOptionOrder.NAME_ASC);
 
   const onChangeSort = (e: any) => {
     setSelectSortValue(e.target.value);
@@ -21,8 +32,10 @@ export function SortTable({ onSort }: SortTableProps) {
       value={selectSortValue}
       onChange={(e) => onChangeSort(e)}
     >
-      <option value={OrderDirectionEnum.ASC}>Order by name: A - Z</option>
-      <option value={OrderDirectionEnum.DESC}>Order by name: Z - A</option>
+      <option value={ListOptionOrder.NAME_ASC}>Order by name: A - Z</option>
+      <option value={ListOptionOrder.NAME_DESC}>Order by name: Z - A</option>
+      <option value={ListOptionOrder.PRICE_ASC}>Order by price: hight to low</option>
+      <option value={ListOptionOrder.PRICE_DESC}>Order by price: low to hight</option>
     </select>
   );
 }

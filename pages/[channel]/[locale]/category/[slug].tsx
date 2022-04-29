@@ -1,7 +1,7 @@
 import { ApolloQueryResult } from "@apollo/client";
 import { GetStaticPaths, GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import Custom404 from "pages/404";
-import React, { ReactElement } from "react";
+import React, { ReactElement, useState } from "react";
 
 import { Layout, PageHero, ProductCollection } from "@/components";
 import { CategoryPageSeo } from "@/components/seo/CategoryPageSeo";
@@ -12,7 +12,10 @@ import {
   CategoryBySlugDocument,
   CategoryBySlugQuery,
   CategoryBySlugQueryVariables,
+  ProductOrder,
 } from "@/saleor/api";
+import { OrderDirectionEnum, ProductOrderFieldEnum } from "graphql/types.generated";
+import { ListOptionOrder, SortTable } from "@/components/SortTable/SortTable";
 
 export const getStaticProps = async (context: GetStaticPropsContext) => {
   const categorySlug = context.params?.slug?.toString()!;
@@ -34,6 +37,42 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
 };
 
 function CategoryPage({ category }: InferGetStaticPropsType<typeof getStaticProps>) {
+  const [productOrder, setProductOrder] = useState<ProductOrder>({
+    direction: OrderDirectionEnum.ASC,
+    field: ProductOrderFieldEnum.NAME,
+  });
+
+  const onSort = (sortBy: ListOptionOrder): void => {
+    const newProductOrder = { ...productOrder };
+
+    switch (sortBy) {
+      case ListOptionOrder.NAME_ASC:
+        newProductOrder.direction = OrderDirectionEnum.ASC;
+        newProductOrder.field = ProductOrderFieldEnum.NAME;
+        break;
+
+      case ListOptionOrder.NAME_DESC:
+        newProductOrder.direction = OrderDirectionEnum.DESC;
+        newProductOrder.field = ProductOrderFieldEnum.NAME;
+        break;
+
+      case ListOptionOrder.PRICE_ASC:
+        newProductOrder.direction = OrderDirectionEnum.ASC;
+        newProductOrder.field = ProductOrderFieldEnum.PRICE;
+        break;
+
+      case ListOptionOrder.PRICE_DESC:
+        newProductOrder.direction = OrderDirectionEnum.DESC;
+        newProductOrder.field = ProductOrderFieldEnum.PRICE;
+        break;
+
+      default:
+        break;
+    }
+
+    setProductOrder(newProductOrder);
+  };
+
   if (!category) {
     return <Custom404 />;
   }
@@ -47,7 +86,13 @@ function CategoryPage({ category }: InferGetStaticPropsType<typeof getStaticProp
       </header>
       <main>
         <div className="max-w-7xl mx-auto px-8">
-          <ProductCollection filter={{ categories: [category?.id] }} />
+          <div className="flex justify-between mb-2">
+            <h1 className="text-3xl font-extrabold tracking-tight text-gray-900 pb-4">
+              {category.name}
+            </h1>
+            <SortTable onSort={onSort} />
+          </div>
+          <ProductCollection filter={{ categories: [category?.id] }} sortBy={productOrder} />
         </div>
       </main>
     </>
