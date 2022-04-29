@@ -1,7 +1,8 @@
 import { ApolloQueryResult } from "@apollo/client";
+import { OrderDirectionEnum, ProductOrderFieldEnum } from "graphql/types.generated";
 import { GetStaticPaths, GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import Custom404 from "pages/404";
-import React, { ReactElement } from "react";
+import React, { ReactElement, useState } from "react";
 import { useIntl } from "react-intl";
 
 import { Layout, PageHero, ProductCollection } from "@/components";
@@ -14,6 +15,8 @@ import {
   CollectionBySlugDocument,
   CollectionBySlugQuery,
   CollectionBySlugQueryVariables,
+  OrderDirection,
+  ProductOrder
 } from "@/saleor/api";
 
 export const getStaticProps = async (context: GetStaticPropsContext) => {
@@ -39,6 +42,17 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
 };
 
 function CollectionPage({ collection }: InferGetStaticPropsType<typeof getStaticProps>) {
+  const [productOrder, setProductOrder] = useState<ProductOrder>({
+    direction: OrderDirectionEnum.ASC,
+    field: ProductOrderFieldEnum.NAME,
+  });
+
+  const onSort = (sortBy: OrderDirection) => {
+    const newProductOrder = { ...productOrder };
+    newProductOrder.direction = sortBy;
+    setProductOrder(newProductOrder);
+  };
+
   const t = useIntl();
   if (!collection) {
     return <Custom404 />;
@@ -58,10 +72,15 @@ function CollectionPage({ collection }: InferGetStaticPropsType<typeof getStatic
               {/* {t.formatMessage(messages.titleCollection)} */}
               {collection.name}
             </h1>
-            <SortTable />
+            <SortTable onSort={onSort} />
           </div>
 
-          <ProductCollection filter={{ collections: [collection?.id] }} />
+          <ProductCollection
+            filter={{
+              collections: [collection?.id],
+            }}
+            sortBy={productOrder}
+          />
         </div>
       </main>
     </>

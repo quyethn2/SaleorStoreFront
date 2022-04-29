@@ -14167,6 +14167,7 @@ export type ProductCollectionQueryVariables = Exact<{
   filter?: InputMaybe<ProductFilterInput>;
   channel: Scalars['String'];
   locale: LanguageCodeEnum;
+  sortBy?: InputMaybe<ProductOrder>;
 }>;
 
 
@@ -15991,13 +15992,14 @@ export type ProductBySlugQueryHookResult = ReturnType<typeof useProductBySlugQue
 export type ProductBySlugLazyQueryHookResult = ReturnType<typeof useProductBySlugLazyQuery>;
 export type ProductBySlugQueryResult = Apollo.QueryResult<ProductBySlugQuery, ProductBySlugQueryVariables>;
 export const ProductCollectionDocument = gql`
-    query ProductCollection($before: String, $after: String, $filter: ProductFilterInput, $channel: String!, $locale: LanguageCodeEnum!) {
+    query ProductCollection($before: String, $after: String, $filter: ProductFilterInput, $channel: String!, $locale: LanguageCodeEnum!, $sortBy: ProductOrder) {
   products(
     first: 2
     channel: $channel
     after: $after
     before: $before
     filter: $filter
+    sortBy: $sortBy
   ) {
     totalCount
     edges {
@@ -16033,6 +16035,7 @@ export const ProductCollectionDocument = gql`
  *      filter: // value for 'filter'
  *      channel: // value for 'channel'
  *      locale: // value for 'locale'
+ *      sortBy: // value for 'sortBy'
  *   },
  * });
  */
