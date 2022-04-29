@@ -5472,7 +5472,6 @@ export type MetadataErrorCode =
   | 'GRAPHQL_ERROR'
   | 'INVALID'
   | 'NOT_FOUND'
-  | 'NOT_UPDATED'
   | 'REQUIRED';
 
 export type MetadataFilter = {
@@ -15994,7 +15993,7 @@ export type ProductBySlugQueryResult = Apollo.QueryResult<ProductBySlugQuery, Pr
 export const ProductCollectionDocument = gql`
     query ProductCollection($before: String, $after: String, $filter: ProductFilterInput, $channel: String!, $locale: LanguageCodeEnum!) {
   products(
-    first: 4
+    first: 2
     channel: $channel
     after: $after
     before: $before
